@@ -23,8 +23,7 @@ spec:
         deployment: backend-1
     spec:
       containers:
-      #- image: image-registry.openshift-image-registry.svc:5000/backend/backend-1@sha256:1da8fda4424c4f574b9fb1e9e7efb40471703bcb31414ef885dc898fcfe875d0
-      - image: quay.io/obryan5598/spring-boot-hello-world@sha256:535f94e715f597e0ecf9bdf25335d7dfbcd216f891018304e772de562f47a545
+      - image: quay.io/obryan5598/spring-boot-hello-world@sha256:535f94e715f597e0ecf9bdf25335d7dfbcd216f891018304e772de562f47a545 
         imagePullPolicy: IfNotPresent
         name: backend-1
         resources:
