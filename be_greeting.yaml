@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  greeting: Hello
+kind: ConfigMap
+metadata:
+  name: backend-greeting
+  namespace: backend

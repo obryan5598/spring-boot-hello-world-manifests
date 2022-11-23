@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend-1
+    app.kubernetes.io/component: backend-1
+    app.kubernetes.io/instance: backend-1
+  name: backend-1
+  namespace: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      deployment: backend-1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        deployment: backend-1
+    spec:
+      containers:
+      #- image: image-registry.openshift-image-registry.svc:5000/backend/backend-1@sha256:1da8fda4424c4f574b9fb1e9e7efb40471703bcb31414ef885dc898fcfe875d0
+      - image: quay.io/obryan5598/spring-boot-hello-world@sha256:535f94e715f597e0ecf9bdf25335d7dfbcd216f891018304e772de562f47a545
+        imagePullPolicy: IfNotPresent
+        name: backend-1
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            memory: 256Mi
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        env:
+          - name: GREETING
+            valueFrom:
+             configMapKeyRef:
+                name: backend-greeting
+                key: greeting
+        volumeMounts:
+        - mountPath: /var/local/SP
+          name: pvc-jars
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 20
+          timeoutSeconds: 2
+          periodSeconds: 3
+          failureThreshold: 2
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 20 
+          timeoutSeconds: 2
+          periodSeconds: 8
+          failureThreshold: 1
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: pvc-jars
+        persistentVolumeClaim:
+          claimName: pvc-jars
