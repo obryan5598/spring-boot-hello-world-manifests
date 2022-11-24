@@ -11,5 +11,4 @@ spec:
         kind: DockerImage
         name: "quay.io/obryan5598/spring-boot-hello-world:1.0"
       importPolicy:
-        insecure: true
         scheduled: true
