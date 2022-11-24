@@ -15,16 +15,5 @@ spec:
     resource:
       name: memory 
       target:
-        type: Utilization 
-        averageUtilization: 10 
-  behavior: 
-    scaleUp:
-      stabilizationWindowSeconds: 10
-      policies:
-      - type: Pods
-        value: 6
-        periodSeconds: 10
-      - type: Percent
-        value: 10
-        periodSeconds: 10
-      selectPolicy: Max
+        type: AverageValue
+        averageValue: 1Gi
