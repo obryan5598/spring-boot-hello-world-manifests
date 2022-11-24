@@ -23,8 +23,7 @@ spec:
         deployment: backend-1
     spec:
       containers:
-      - image: spring-boot-hello-world-imagestream:v1.0 
-        imagePullPolicy: IfNotPresent
+      - image: spring-boot-hello-world-imagestream:v1.0
         name: backend-1
         resources:
           limits:
