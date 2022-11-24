@@ -23,7 +23,7 @@ spec:
         deployment: backend-1
     spec:
       containers:
-      - image: quay.io/obryan5598/spring-boot-hello-world@sha256:4ee0ed513b4c79536bd2fa5965d1d9ce6cbb8d7a718f5088b10c6051305b4c7c 
+      - image: spring-boot-hello-world-imagestream:v1.0 
         imagePullPolicy: IfNotPresent
         name: backend-1
         resources:
