@@ -6,7 +6,8 @@ spec:
   lookupPolicy:
     local: true
   tags:
-    - from:
+    - name: v1.0
+      from:
         kind: DockerImage
         name: "quay.io/obryan5598/spring-boot-hello-world:1.0"
       importPolicy:
