@@ -7,6 +7,9 @@ metadata:
     app.kubernetes.io/instance: backend-1
   name: backend-1
   namespace: backend
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"spring-boot-hello-world-imagestream:v1.0"},"fieldPath":"spec.template.spec.containers[?(@.name==\"backend-1\")].image"}]
 spec:
   replicas: 2
   selector:
